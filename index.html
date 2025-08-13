@@ -2,22 +2,132 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Informativa sulla Privacy - Biovaria App</title>
+    <title>Informativa sulla Privacy - BioVaria</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        select { padding: 5px; margin-bottom: 20px; }
+        h1, h2 { color: #2c7a2c; }
+    </style>
 </head>
 <body>
-    <h1>Informativa sulla Privacy</h1>
-    <p>Questa app utilizza la fotocamera esclusivamente per [indicare lo scopo, es. scansione di codici QR].
-       Le immagini acquisite non vengono memorizzate né inviate a server esterni.</p>
 
-    <h2>Permessi utilizzati</h2>
-    <ul>
-        <li>Camera (<code>android.permission.CAMERA</code>): necessaria per [scopo specifico].</li>
-    </ul>
+    <label for="langSelect"><strong>Lingua / Language / Langue / Sprache:</strong></label>
+    <select id="langSelect">
+        <option value="it">Italiano</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+    </select>
 
-    <h2>Conservazione dei dati</h2>
-    <p>Nessun dato personale viene conservato o condiviso con terze parti. Tutto l'elaborato avviene in locale sul dispositivo.</p>
+    <div id="content"></div>
 
-    <h2>Contatti</h2>
-    <p>Per domande sulla privacy: [la tua email di contatto]</p>
+<script>
+const translations = {
+    it: `
+        <h1>Informativa sulla Privacy</h1>
+        <p><strong>BioVaria</strong> è stata sviluppata come progetto di tesi in Ingegneria Informatica presso il Dipartimento tecnologie innovative (DTI) della SUPSI, a Lugano.</p>
+        <p>L’idea alla base del progetto è lo sviluppo di un’applicazione mobile il cui obiettivo principale è il censimento delle specie vegetali presenti all’interno di parchi o giardini naturali...</p>
+        <h2>Dati raccolti e utilizzo</h2>
+        <ul>
+            <li><strong>Posizione geografica</strong>: usata per determinare se l’utente è in un parco botanico.</li>
+            <li><strong>Immagini scattate</strong>: inviate al backend e poi a PlantNet per il riconoscimento.</li>
+            <li><strong>Informazioni di rete</strong>: per comunicare con il backend.</li>
+            <li><strong>Notifiche locali</strong>: per inviare aggiornamenti.</li>
+        </ul>
+        <h2>Permessi utilizzati</h2>
+        <ul>
+            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
+        </ul>
+        <h2>Conservazione e condivisione dei dati</h2>
+        <p>La posizione rimane in locale, le foto transitano solo per PlantNet, il database contiene solo dati sulle piante identificate e dinamiche di gioco (profili, punteggi, livelli).</p>
+        <h2>Diritti dell’utente</h2>
+        <p>L’utente può richiedere la cancellazione dei dati contattando lo sviluppatore.</p>
+        <h2>Contatti</h2>
+        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Studente e sviluppatore)<br>
+           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Relatore)</p>
+    `,
+    fr: `
+        <h1>Politique de Confidentialité</h1>
+        <p><strong>BioVaria</strong> a été développée comme projet de thèse en ingénierie informatique à la SUPSI, Lugano.</p>
+        <p>Le projet vise à créer une application mobile pour recenser les espèces végétales dans les parcs et jardins botaniques...</p>
+        <h2>Données collectées et utilisation</h2>
+        <ul>
+            <li><strong>Position géographique</strong> : utilisée pour déterminer si l'utilisateur est dans un parc botanique.</li>
+            <li><strong>Images prises</strong> : envoyées au backend puis à PlantNet pour identification.</li>
+            <li><strong>Informations réseau</strong> : nécessaires pour communiquer avec le backend.</li>
+            <li><strong>Notifications locales</strong> : pour envoyer des rappels et mises à jour.</li>
+        </ul>
+        <h2>Autorisations utilisées</h2>
+        <ul>
+            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
+        </ul>
+        <h2>Conservation et partage des données</h2>
+        <p>La position reste locale, les photos transitent uniquement pour PlantNet, la base de données contient uniquement des données sur les plantes identifiées et les dynamiques de jeu.</p>
+        <h2>Droits de l'utilisateur</h2>
+        <p>L'utilisateur peut demander la suppression des données en contactant le développeur.</p>
+        <h2>Contacts</h2>
+        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Étudiant et développeur)<br>
+           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Directeur)</p>
+    `,
+    de: `
+        <h1>Datenschutzerklärung</h1>
+        <p><strong>BioVaria</strong> wurde als Bachelorarbeit im Studiengang Informatik an der SUPSI in Lugano entwickelt.</p>
+        <p>Das Ziel des Projekts ist die Entwicklung einer mobilen App zur Erfassung von Pflanzenarten in Parks und botanischen Gärten...</p>
+        <h2>Gesammelte Daten und Nutzung</h2>
+        <ul>
+            <li><strong>Standort</strong>: um festzustellen, ob sich der Benutzer in einem botanischen Park befindet.</li>
+            <li><strong>Aufgenommene Bilder</strong>: werden an das Backend und dann an PlantNet zur Erkennung gesendet.</li>
+            <li><strong>Netzwerkinformationen</strong>: für die Kommunikation mit dem Backend.</li>
+            <li><strong>Lokale Benachrichtigungen</strong>: um Erinnerungen und Updates zu senden.</li>
+        </ul>
+        <h2>Verwendete Berechtigungen</h2>
+        <ul>
+            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
+        </ul>
+        <h2>Speicherung und Weitergabe von Daten</h2>
+        <p>Der Standort bleibt lokal, Fotos werden nur für PlantNet durchgeleitet, die Datenbank enthält nur Informationen zu identifizierten Pflanzen und Spieldynamiken.</p>
+        <h2>Rechte des Benutzers</h2>
+        <p>Der Benutzer kann die Löschung seiner Daten beantragen, indem er den Entwickler kontaktiert.</p>
+        <h2>Kontakt</h2>
+        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Student und Entwickler)<br>
+           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Betreuer)</p>
+    `,
+    en: `
+        <h1>Privacy Policy</h1>
+        <p><strong>BioVaria</strong> was developed as a Computer Engineering thesis project at SUPSI, Lugano.</p>
+        <p>The aim of the project is to create a mobile app to census plant species in parks and botanical gardens...</p>
+        <h2>Data collected and use</h2>
+        <ul>
+            <li><strong>Geolocation</strong>: used to determine if the user is inside a botanical park.</li>
+            <li><strong>Pictures taken</strong>: sent to the backend and then to PlantNet for species identification.</li>
+            <li><strong>Network information</strong>: required to communicate with the backend.</li>
+            <li><strong>Local notifications</strong>: used to send reminders and updates.</li>
+        </ul>
+        <h2>Permissions used</h2>
+        <ul>
+            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
+        </ul>
+        <h2>Data storage and sharing</h2>
+        <p>Location remains local, photos only pass through to PlantNet, the database stores only identified plant data and game dynamics (profiles, scores, levels).</p>
+        <h2>User rights</h2>
+        <p>Users can request deletion of their data by contacting the developer.</p>
+        <h2>Contacts</h2>
+        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Student and developer)<br>
+           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Supervisor)</p>
+    `
+};
+
+const contentDiv = document.getElementById('content');
+const langSelect = document.getElementById('langSelect');
+
+function updateLanguage(lang) {
+    contentDiv.innerHTML = translations[lang];
+}
+langSelect.addEventListener('change', e => updateLanguage(e.target.value));
+
+// Default italiano
+updateLanguage('it');
+</script>
+
 </body>
 </html>
