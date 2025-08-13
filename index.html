@@ -25,7 +25,6 @@
             <option value="de">Deutsch</option>
             <option value="en">English</option>
         </select>
-        <small id="hint"></small>
     </div>
 
     <div id="content"></div>
@@ -258,13 +257,6 @@ function updateLanguage(lang) {
     document.documentElement.setAttribute('lang', lang);
     // sostituisce il contenuto
     contentDiv.innerHTML = translations[lang];
-    // piccolo suggerimento
-    hint.textContent = {
-        it: "Stai visualizzando la versione italiana.",
-        fr: "Vous consultez la version française.",
-        de: "Sie sehen die deutsche Version.",
-        en: "You are viewing the English version."
-    }[lang] || "";
 }
 
 langSelect.addEventListener('change', e => updateLanguage(e.target.value));
