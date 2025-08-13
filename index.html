@@ -3,129 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <title>Informativa sulla Privacy - BioVaria</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-        select { padding: 5px; margin-bottom: 20px; }
-        h1, h2 { color: #2c7a2c; }
+        body { font-family: 'Montserrat', sans-serif; margin: 20px; line-height: 1.6; }
+        select { padding: 6px 8px; margin-bottom: 20px; }
+        h1, h2 { color: #2c7a2c; font-weight: 600;}
+        p {font-weight: 400;}
+        .langbar { display: flex; gap: 12px; align-items: center; }
+        .langbar small { opacity: 0.7; }
     </style>
 </head>
 <body>
 
-    <label for="langSelect"><strong>Lingua / Language / Langue / Sprache:</strong></label>
-    <select id="langSelect">
-        <option value="it">Italiano</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
-        <option value="en">English</option>
-    </select>
+    <div class="langbar">
+        <label for="langSelect"><strong>Lingua / Language / Langue / Sprache:</strong></label>
+        <select id="langSelect" aria-label="Seleziona lingua">
+            <option value="it">Italiano</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+        </select>
+        <small id="hint"></small>
+    </div>
 
     <div id="content"></div>
 
 <script>
-const translations = {
-    it: `
-        <h1>Informativa sulla Privacy</h1>
-        <p><strong>BioVaria</strong> è stata sviluppata come progetto di tesi in Ingegneria Informatica presso il Dipartimento tecnologie innovative (DTI) della SUPSI, a Lugano.</p>
-        <p>L’idea alla base del progetto è lo sviluppo di un’applicazione mobile il cui obiettivo principale è il censimento delle specie vegetali presenti all’interno di parchi o giardini naturali...</p>
-        <h2>Dati raccolti e utilizzo</h2>
-        <ul>
-            <li><strong>Posizione geografica</strong>: usata per determinare se l’utente è in un parco botanico.</li>
-            <li><strong>Immagini scattate</strong>: inviate al backend e poi a PlantNet per il riconoscimento.</li>
-            <li><strong>Informazioni di rete</strong>: per comunicare con il backend.</li>
-            <li><strong>Notifiche locali</strong>: per inviare aggiornamenti.</li>
-        </ul>
-        <h2>Permessi utilizzati</h2>
-        <ul>
-            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
-        </ul>
-        <h2>Conservazione e condivisione dei dati</h2>
-        <p>La posizione rimane in locale, le foto transitano solo per PlantNet, il database contiene solo dati sulle piante identificate e dinamiche di gioco (profili, punteggi, livelli).</p>
-        <h2>Diritti dell’utente</h2>
-        <p>L’utente può richiedere la cancellazione dei dati contattando lo sviluppatore.</p>
-        <h2>Contatti</h2>
-        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Studente e sviluppatore)<br>
-           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Relatore)</p>
-    `,
-    fr: `
-        <h1>Politique de Confidentialité</h1>
-        <p><strong>BioVaria</strong> a été développée comme projet de thèse en ingénierie informatique à la SUPSI, Lugano.</p>
-        <p>Le projet vise à créer une application mobile pour recenser les espèces végétales dans les parcs et jardins botaniques...</p>
-        <h2>Données collectées et utilisation</h2>
-        <ul>
-            <li><strong>Position géographique</strong> : utilisée pour déterminer si l'utilisateur est dans un parc botanique.</li>
-            <li><strong>Images prises</strong> : envoyées au backend puis à PlantNet pour identification.</li>
-            <li><strong>Informations réseau</strong> : nécessaires pour communiquer avec le backend.</li>
-            <li><strong>Notifications locales</strong> : pour envoyer des rappels et mises à jour.</li>
-        </ul>
-        <h2>Autorisations utilisées</h2>
-        <ul>
-            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
-        </ul>
-        <h2>Conservation et partage des données</h2>
-        <p>La position reste locale, les photos transitent uniquement pour PlantNet, la base de données contient uniquement des données sur les plantes identifiées et les dynamiques de jeu.</p>
-        <h2>Droits de l'utilisateur</h2>
-        <p>L'utilisateur peut demander la suppression des données en contactant le développeur.</p>
-        <h2>Contacts</h2>
-        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Étudiant et développeur)<br>
-           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Directeur)</p>
-    `,
-    de: `
-        <h1>Datenschutzerklärung</h1>
-        <p><strong>BioVaria</strong> wurde als Bachelorarbeit im Studiengang Informatik an der SUPSI in Lugano entwickelt.</p>
-        <p>Das Ziel des Projekts ist die Entwicklung einer mobilen App zur Erfassung von Pflanzenarten in Parks und botanischen Gärten...</p>
-        <h2>Gesammelte Daten und Nutzung</h2>
-        <ul>
-            <li><strong>Standort</strong>: um festzustellen, ob sich der Benutzer in einem botanischen Park befindet.</li>
-            <li><strong>Aufgenommene Bilder</strong>: werden an das Backend und dann an PlantNet zur Erkennung gesendet.</li>
-            <li><strong>Netzwerkinformationen</strong>: für die Kommunikation mit dem Backend.</li>
-            <li><strong>Lokale Benachrichtigungen</strong>: um Erinnerungen und Updates zu senden.</li>
-        </ul>
-        <h2>Verwendete Berechtigungen</h2>
-        <ul>
-            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
-        </ul>
-        <h2>Speicherung und Weitergabe von Daten</h2>
-        <p>Der Standort bleibt lokal, Fotos werden nur für PlantNet durchgeleitet, die Datenbank enthält nur Informationen zu identifizierten Pflanzen und Spieldynamiken.</p>
-        <h2>Rechte des Benutzers</h2>
-        <p>Der Benutzer kann die Löschung seiner Daten beantragen, indem er den Entwickler kontaktiert.</p>
-        <h2>Kontakt</h2>
-        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Student und Entwickler)<br>
-           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Betreuer)</p>
-    `,
-    en: `
-        <h1>Privacy Policy</h1>
-        <p><strong>BioVaria</strong> was developed as a Computer Engineering thesis project at SUPSI, Lugano.</p>
-        <p>The aim of the project is to create a mobile app to census plant species in parks and botanical gardens...</p>
-        <h2>Data collected and use</h2>
-        <ul>
-            <li><strong>Geolocation</strong>: used to determine if the user is inside a botanical park.</li>
-            <li><strong>Pictures taken</strong>: sent to the backend and then to PlantNet for species identification.</li>
-            <li><strong>Network information</strong>: required to communicate with the backend.</li>
-            <li><strong>Local notifications</strong>: used to send reminders and updates.</li>
-        </ul>
-        <h2>Permissions used</h2>
-        <ul>
-            <li>INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, CAMERA, READ_EXTERNAL_STORAGE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, SCHEDULE_EXACT_ALARM</li>
-        </ul>
-        <h2>Data storage and sharing</h2>
-        <p>Location remains local, photos only pass through to PlantNet, the database stores only identified plant data and game dynamics (profiles, scores, levels).</p>
-        <h2>User rights</h2>
-        <p>Users can request deletion of their data by contacting the developer.</p>
-        <h2>Contacts</h2>
-        <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Student and developer)<br>
-           <a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Supervisor)</p>
-    `
-};
+const it = `
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Informativa sulla Privacy - BioVaria</title>
+</head>
+<body>
+    <h1>Informativa sulla Privacy</h1>
+
+    <p><strong>BioVaria</strong> è stata sviluppata come progetto di tesi in Ingegneria Informatica presso il Dipartimento tecnologie innovative (DTI) della SUPSI, a Lugano.</p>
+
+    <p>L’idea alla base del progetto è lo sviluppo di un’applicazione mobile il cui obiettivo principale è il censimento delle specie vegetali presenti all’interno di parchi o giardini naturali. L’app si configura come un gioco che, attraverso meccaniche di sfida, incentiva l’utente a scattare quante più foto possibili alla flora circostante, identificarla e contribuire alla popolazione di un database condiviso utile al censimento botanico.</p>
+
+    <h2>Dati raccolti e utilizzo</h2>
+    <ul>
+        <li><strong>Posizione geografica</strong>: viene utilizzata per determinare se l’utente si trova all’interno di un parco botanico, in modo da fornire funzioni contestuali.</li>
+        <li><strong>Immagini scattate</strong>: le foto delle piante vengono inviate al backend, il quale le inoltra al servizio API di PlantNet per il riconoscimento della specie botanica.</li>
+        <li><strong>Informazioni di rete</strong>: necessarie per comunicare con il backend e inviare/ricevere dati.</li>
+        <li><strong>Notifiche locali</strong>: utilizzate per inviare all’utente promemoria o aggiornamenti relativi al gioco e alle attività botaniche.</li>
+    </ul>
+
+    <h2>Permessi utilizzati</h2>
+    <ul>
+        <li><code>android.permission.INTERNET</code> – per la comunicazione con il backend e l’invio dei dati raccolti.</li>
+        <li><code>android.permission.ACCESS_FINE_LOCATION</code> – per geolocalizzare il dispositivo con precisione e verificare la posizione all’interno di un parco botanico.</li>
+        <li><code>android.permission.ACCESS_COARSE_LOCATION</code> – per geolocalizzazione approssimativa quando non è necessaria alta precisione.</li>
+        <li><code>android.permission.CAMERA</code> – per scattare foto delle piante.</li>
+        <li><code>android.permission.READ_EXTERNAL_STORAGE</code> – per accedere alle foto scattate e inviarle al backend.</li>
+        <li><code>android.permission.POST_NOTIFICATIONS</code> – per mostrare notifiche locali sul dispositivo.</li>
+        <li><code>android.permission.RECEIVE_BOOT_COMPLETED</code> – per riprogrammare notifiche dopo il riavvio del dispositivo.</li>
+        <li><code>android.permission.SCHEDULE_EXACT_ALARM</code> – per pianificare notifiche con orario preciso.</li>
+    </ul>
+
+<h2>Conservazione e condivisione dei dati</h2>
+<p>
+La <strong>posizione geografica</strong> rimane sempre in locale sul dispositivo e non viene mai inviata o salvata sul backend.<br>
+Le <strong>foto delle piante</strong> non vengono memorizzate in alcun database: transitano unicamente tramite il backend per essere inoltrate al servizio esterno PlantNet, esclusivamente ai fini del riconoscimento della specie botanica.<br>
+I dati che vengono salvati nel database riguardano <strong>esclusivamente</strong> le informazioni legate alle piante identificate (nome specie, data e ora di identificazione) e le <strong>dinamiche di gioco</strong>, come ad esempio profili utente, punteggi, livelli e progressi di gioco.<br>
+Non vengono condivisi o conservati dati personali non necessari.
+</p>
+
+    <h2>Diritti dell’utente</h2>
+    <p>L’utente può in qualsiasi momento richiedere la cancellazione dei propri dati contattando lo sviluppatore.</p>
+
+    <h2>Contatti</h2>
+    <p>Per domande o richieste sulla privacy:</p>
+    <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Studente e sviluppatore)</p>
+    <p><a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Relatore)</p>
+
+</body>
+</html>
+`;
+
+const fr = `
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Politique de Confidentialité - BioVaria</title>
+</head>
+<body>
+    <h1>Politique de Confidentialité</h1>
+
+    <p><strong>BioVaria</strong> a été développée comme projet de thèse en Ingénierie Informatique au Département des technologies innovantes (DTI) de la SUPSI, à Lugano.</p>
+
+    <p>L’idée du projet est de développer une application mobile dont l’objectif principal est le recensement des espèces végétales présentes dans les parcs ou jardins naturels. L’application prend la forme d’un jeu qui, grâce à des mécaniques de défi, encourage l’utilisateur à prendre le plus de photos possible de la flore environnante, à l’identifier et à contribuer ainsi à l’alimentation d’une base de données partagée utile au recensement botanique.</p>
+
+    <h2>Données collectées et utilisation</h2>
+    <ul>
+        <li><strong>Position géographique</strong> : utilisée pour déterminer si l’utilisateur se trouve à l’intérieur d’un parc botanique, afin de fournir des fonctions contextuelles.</li>
+        <li><strong>Images prises</strong> : les photos des plantes sont envoyées au backend, qui les transmet au service API de PlantNet pour la reconnaissance de l’espèce botanique.</li>
+        <li><strong>Informations réseau</strong> : nécessaires pour communiquer avec le backend et envoyer/recevoir des données.</li>
+        <li><strong>Notifications locales</strong> : utilisées pour envoyer à l’utilisateur des rappels ou des mises à jour relatives au jeu et aux activités botaniques.</li>
+    </ul>
+
+    <h2>Autorisations utilisées</h2>
+    <ul>
+        <li><code>android.permission.INTERNET</code> – pour la communication avec le backend et l’envoi des données collectées.</li>
+        <li><code>android.permission.ACCESS_FINE_LOCATION</code> – pour géolocaliser l’appareil avec précision et vérifier la position à l’intérieur d’un parc botanique.</li>
+        <li><code>android.permission.ACCESS_COARSE_LOCATION</code> – pour une géolocalisation approximative lorsqu’une haute précision n’est pas nécessaire.</li>
+        <li><code>android.permission.CAMERA</code> – pour prendre des photos des plantes.</li>
+        <li><code>android.permission.READ_EXTERNAL_STORAGE</code> – pour accéder aux photos prises et les envoyer au backend.</li>
+        <li><code>android.permission.POST_NOTIFICATIONS</code> – pour afficher des notifications locales sur l’appareil.</li>
+        <li><code>android.permission.RECEIVE_BOOT_COMPLETED</code> – pour reprogrammer les notifications après le redémarrage de l’appareil.</li>
+        <li><code>android.permission.SCHEDULE_EXACT_ALARM</code> – pour planifier des notifications à heure précise.</li>
+    </ul>
+
+<h2>Conservation et partage des données</h2>
+<p>
+La <strong>position géographique</strong> reste toujours en local sur l’appareil et n’est jamais envoyée ni enregistrée sur le backend.<br>
+Les <strong>photos des plantes</strong> ne sont enregistrées dans aucune base de données : elles transitent uniquement par le backend pour être transmises au service externe PlantNet, exclusivement aux fins de la reconnaissance de l’espèce botanique.<br>
+Les données enregistrées dans la base concernent <strong>exclusivement</strong> les informations liées aux plantes identifiées (nom de l’espèce, date et heure d’identification) et les <strong>dynamiques de jeu</strong>, telles que les profils utilisateurs, les scores, les niveaux et la progression.<br>
+Aucune donnée personnelle non nécessaire n’est partagée ni conservée.
+</p>
+
+    <h2>Droits de l’utilisateur</h2>
+    <p>L’utilisateur peut à tout moment demander la suppression de ses données en contactant le développeur.</p>
+
+    <h2>Contacts</h2>
+    <p>Pour toute question ou demande relative à la confidentialité :</p>
+    <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Étudiant et développeur)</p>
+    <p><a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Directeur)</p>
+
+</body>
+</html>
+`;
+
+const de = `
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Datenschutzerklärung - BioVaria</title>
+</head>
+<body>
+    <h1>Datenschutzerklärung</h1>
+
+    <p><strong>BioVaria</strong> wurde als Abschlussprojekt im Studiengang Informatik am Departement für innovative Technologien (DTI) der SUPSI in Lugano entwickelt.</p>
+
+    <p>Die Idee des Projekts ist die Entwicklung einer mobilen Anwendung, deren Hauptziel die Erfassung von Pflanzenarten in Parks oder natürlichen Gärten ist. Die App ist als Spiel konzipiert, das die Nutzerinnen und Nutzer durch Wettbewerbsmechaniken dazu anregt, möglichst viele Fotos der umliegenden Flora zu machen, diese zu identifizieren und so zur Befüllung einer gemeinsamen Datenbank beizutragen, die für die botanische Erfassung nützlich ist.</p>
+
+    <h2>Erhobene Daten und Nutzung</h2>
+    <ul>
+        <li><strong>Geografischer Standort</strong>: wird verwendet, um festzustellen, ob sich die Nutzerin/der Nutzer in einem botanischen Park befindet, um kontextbezogene Funktionen bereitzustellen.</li>
+        <li><strong>Aufgenommene Bilder</strong>: Fotos von Pflanzen werden an das Backend gesendet, das sie an den PlantNet-API-Dienst zur Bestimmung der botanischen Art weiterleitet.</li>
+        <li><strong>Netzwerkinformationen</strong>: erforderlich, um mit dem Backend zu kommunizieren und Daten zu senden/empfangen.</li>
+        <li><strong>Lokale Benachrichtigungen</strong>: werden verwendet, um Erinnerungen oder Aktualisierungen im Zusammenhang mit dem Spiel und botanischen Aktivitäten zu senden.</li>
+    </ul>
+
+    <h2>Verwendete Berechtigungen</h2>
+    <ul>
+        <li><code>android.permission.INTERNET</code> – für die Kommunikation mit dem Backend und das Senden der gesammelten Daten.</li>
+        <li><code>android.permission.ACCESS_FINE_LOCATION</code> – um das Gerät präzise zu orten und die Position innerhalb eines botanischen Parks zu prüfen.</li>
+        <li><code>android.permission.ACCESS_COARSE_LOCATION</code> – für eine ungefähre Standortbestimmung, wenn keine hohe Genauigkeit erforderlich ist.</li>
+        <li><code>android.permission.CAMERA</code> – um Fotos von Pflanzen aufzunehmen.</li>
+        <li><code>android.permission.READ_EXTERNAL_STORAGE</code> – um auf die aufgenommenen Fotos zuzugreifen und sie an das Backend zu senden.</li>
+        <li><code>android.permission.POST_NOTIFICATIONS</code> – um lokale Benachrichtigungen auf dem Gerät anzuzeigen.</li>
+        <li><code>android.permission.RECEIVE_BOOT_COMPLETED</code> – um Benachrichtigungen nach dem Neustart des Geräts neu zu planen.</li>
+        <li><code>android.permission.SCHEDULE_EXACT_ALARM</code> – um Benachrichtigungen zu einem genauen Zeitpunkt zu planen.</li>
+    </ul>
+
+<h2>Speicherung und Weitergabe von Daten</h2>
+<p>
+Der <strong>geografische Standort</strong> verbleibt stets lokal auf dem Gerät und wird niemals an das Backend gesendet oder dort gespeichert.<br>
+Die <strong>Pflanzenfotos</strong> werden in keiner Datenbank gespeichert: sie durchlaufen lediglich das Backend, um ausschließlich zum Zweck der Bestimmung der botanischen Art an den externen Dienst PlantNet weitergeleitet zu werden.<br>
+In der Datenbank werden <strong>ausschließlich</strong> Informationen zu identifizierten Pflanzen (Artname, Datum und Uhrzeit der Identifizierung) sowie <strong>Spieldynamiken</strong> gespeichert, z. B. Nutzerprofile, Punktestände, Levels und Spielfortschritt.<br>
+Es werden keine unnötigen personenbezogenen Daten weitergegeben oder gespeichert.
+</p>
+
+    <h2>Rechte der Nutzerinnen und Nutzer</h2>
+    <p>Nutzerinnen und Nutzer können jederzeit die Löschung ihrer Daten verlangen, indem sie die/den Entwickler(in) kontaktieren.</p>
+
+    <h2>Kontakt</h2>
+    <p>Bei Fragen oder Anliegen zum Datenschutz:</p>
+    <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Student und Entwickler)</p>
+    <p><a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Betreuer)</p>
+
+</body>
+</html>
+`;
+
+const en = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privacy Policy - BioVaria</title>
+</head>
+<body>
+    <h1>Privacy Policy</h1>
+
+    <p><strong>BioVaria</strong> was developed as a thesis project in Computer Engineering at the Department of Innovative Technologies (DTI) of SUPSI, in Lugano.</p>
+
+    <p>The idea behind the project is to develop a mobile application whose main objective is the census of plant species present within parks or natural gardens. The app is designed as a game which, through challenge mechanics, encourages users to take as many photos as possible of the surrounding flora, identify it, and thus contribute to populating a shared database useful for botanical census activities.</p>
+
+    <h2>Data collected and use</h2>
+    <ul>
+        <li><strong>Geographical location</strong>: used to determine whether the user is inside a botanical park, in order to provide contextual features.</li>
+        <li><strong>Pictures taken</strong>: photos of plants are sent to the backend, which forwards them to the PlantNet API service for botanical species recognition.</li>
+        <li><strong>Network information</strong>: required to communicate with the backend and send/receive data.</li>
+        <li><strong>Local notifications</strong>: used to send the user reminders or updates related to the game and botanical activities.</li>
+    </ul>
+
+    <h2>Permissions used</h2>
+    <ul>
+        <li><code>android.permission.INTERNET</code> – for communication with the backend and sending collected data.</li>
+        <li><code>android.permission.ACCESS_FINE_LOCATION</code> – to geolocate the device accurately and verify whether it is inside a botanical park.</li>
+        <li><code>android.permission.ACCESS_COARSE_LOCATION</code> – for approximate geolocation when high accuracy is not required.</li>
+        <li><code>android.permission.CAMERA</code> – to take pictures of plants.</li>
+        <li><code>android.permission.READ_EXTERNAL_STORAGE</code> – to access the pictures taken and send them to the backend.</li>
+        <li><code>android.permission.POST_NOTIFICATIONS</code> – to show local notifications on the device.</li>
+        <li><code>android.permission.RECEIVE_BOOT_COMPLETED</code> – to reschedule notifications after the device restarts.</li>
+        <li><code>android.permission.SCHEDULE_EXACT_ALARM</code> – to schedule notifications at an exact time.</li>
+    </ul>
+
+<h2>Data storage and sharing</h2>
+<p>
+The <strong>geographical location</strong> always remains local on the device and is never sent to or stored on the backend.<br>
+<strong>Plant photos</strong> are not stored in any database: they only transit through the backend to be forwarded to the external PlantNet service, exclusively for the purpose of botanical species recognition.<br>
+The data stored in the database concerns <strong>exclusively</strong> the information related to the identified plants (species name, date and time of identification) and the <strong>game dynamics</strong>, such as user profiles, scores, levels, and game progress.<br>
+No unnecessary personal data is shared or retained.
+</p>
+
+    <h2>User rights</h2>
+    <p>Users can request the deletion of their data at any time by contacting the developer.</p>
+
+    <h2>Contacts</h2>
+    <p>For questions or privacy requests:</p>
+    <p><a href="mailto:mattia.verdolin@outlook.it">Mattia Verdolin</a> (Student and developer)</p>
+    <p><a href="mailto:salvatore.vanini@supsi.ch">Salvatore Vanini</a> (Supervisor)</p>
+
+</body>
+</html>
+`;
+
+const translations = { it, fr, de, en };
 
 const contentDiv = document.getElementById('content');
 const langSelect = document.getElementById('langSelect');
+const hint = document.getElementById('hint');
 
 function updateLanguage(lang) {
+    // aggiorna l'attributo lang della pagina
+    document.documentElement.setAttribute('lang', lang);
+    // sostituisce il contenuto
     contentDiv.innerHTML = translations[lang];
+    // piccolo suggerimento
+    hint.textContent = {
+        it: "Stai visualizzando la versione italiana.",
+        fr: "Vous consultez la version française.",
+        de: "Sie sehen die deutsche Version.",
+        en: "You are viewing the English version."
+    }[lang] || "";
 }
+
 langSelect.addEventListener('change', e => updateLanguage(e.target.value));
 
-// Default italiano
+// Default: italiano
 updateLanguage('it');
 </script>
 
